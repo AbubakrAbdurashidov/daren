@@ -10,7 +10,8 @@ def article_view(request):
     cat = request.GET.get('cat')
     q = request.GET.get('q')
     tags = Tag.objects.all()
-    banner_articles = Article.objects.order_by('-id')[:2]
+    banner_articles = Article.objects.order_by('-id')[:1]
+    banner_article = Article.objects.all()[:1]
     last_articles = Article.objects.order_by('-id')[:3]
     object_articles = Article.objects.all()[:3]
     categories = Category.objects.all()
@@ -26,6 +27,7 @@ def article_view(request):
     ctx = {
         'object_list': articles,
         'banner_articles': banner_articles,
+        'banner_article': banner_article,
         'tags': tags,
         'categories': categories,
         'last_articles': last_articles,

@@ -7,22 +7,28 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-                <div class="banner_post_1 banner_post_bg_1">
+                {% for banner_article in banner_articles %}
+                	<div class="banner_post_1 banner_post_bg_1">
                     <div class="banner_post_iner text-center">
-                        <a href="{% url 'article:category' %}"><h5> Creative & Design</h5></a>
-                        <a href="#"><h2>All said replenish years void <br>
-                            kind say void </h2></a>
-                        <p><span> By Michal</span> / March 30 , 2019</p>
+                        <a href="{% url 'article:category' %}?cat={{ category.title }}"><h5>{{ banner_article.category.title }}</h5></a>
+                        <a href="{% url 'article:detail' banner_article.slug %}"><h2>{{ banner_article.title|slice:"40" }}...
+                             </h2></a>
+                        <p><span> By {{ banner_article.author.name }}</span> / {{ banner_article.created_date|date:"F d, Y" }}</p>
                     </div>
                 </div>
-                <div class="banner_post_2 banner_post_bg_2">
+                {% endfor %}
+
+                {% for banner_article in banner_article %}
+                	<div class="banner_post_2 banner_post_bg_2">
                     <div class="banner_post_iner">
-                        <a href="{% url 'article:category' %}"><h5> Creative & Design</h5></a>
-                        <a href="#"><h2>Behold given land one first face fish which all said
-                            male fruit void king saying</h2></a>
-                        <p><span> By Michal</span> / March 30 , 2019</p>
+                        <a href="{% url 'article:category' %}?cat={{ category.title }}"><h5> {{ banner_article.category.title }}</h5></a>
+                        <a href="{% url 'article:detail' banner_article.slug %}"><h2>{{ banner_article.title|slice:"70" }}...</h2></a>
+                        <p><span> By {{ banner_article.author.name }}</span> / {{ banner_article.created_date|date:"F d, Y" }}</p>
                     </div>
                 </div>
+                {% endfor %}
+
+
             </div>
         </div>
     </div>
