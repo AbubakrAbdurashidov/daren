@@ -34,7 +34,7 @@
                             <div class="post_text_1 pr_30">
                                 <p><span> By {{ object.author.name }}</span> / {{ object.created_date|date:"F d, Y" }}</p>
                                 <a href="{% url 'article:detail' object.slug %}">
-                                    <h3>{{ object.title|safe|slice:"40" }}</h3>
+                                    <h3>{{ object.title|slice:"40" }}</h3>
                                 </a>
                                 <div class="post_icon">
                                     <ul>

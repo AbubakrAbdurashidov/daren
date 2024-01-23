@@ -113,7 +113,7 @@
                         <div class="post_text_1 media-body align-self-center">
                             <p><span> By {{ object.author.name }}</span> / {{ object.created_date|date:"F d, Y" }}</p>
                             <a href="{% url 'article:detail' object.slug %}">
-                                <h3>{{ object.title }}</h3>
+                                <h3>{{ object.title|slice:"70" }}</h3>
                             </a>
                             <div class="post_icon">
                                 <ul>

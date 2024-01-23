@@ -39,17 +39,19 @@
                         </ul>
                         {% for article_content in object.ArticleContent.all %}
 
-                        {{ article_content.header_content|safe }}
 
-                        {% if not object.quote_content %}
+
+                        {% if article_content.is_quote %}
                         	<div class="quote-wrapper">
                                 <div class="quotes">
-                                    {{ article_content.quote_content|safe }}
+                                    {{ article_content.content|safe }}
                                 </div>
                             </div>
+                        {% else %}
+                            {{ article_content.content|safe }}
                         {% endif %}
 
-                         {{ article_content.footer_content|safe }}
+
 
                         {% endfor %}
                     </div>

@@ -56,8 +56,7 @@ def article_detail(request, slug):
         articles = articles.filter(tags__title__exact=tag)
 
     if author:
-        articles = articles.filter(author__name__exact=author)
-    print(author)
+        articles = articles.filter(author__name=author)
     if request.method == 'POST':
         form = CommentForm(data=request.POST, files=request.FILES)
         if form.is_valid():

@@ -49,12 +49,11 @@ class Article(models.Model):
 
 class ArticleContent(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='ArticleContent')
-    header_content = RichTextField()
-    quote_content = RichTextField(null=True, blank=True)
-    footer_content = RichTextField()
+    content = RichTextField(null=True, blank=True)
+    is_quote = models.BooleanField(default=False)
 
     def __str__(self) -> str:
-        return self.header_content
+        return self.article.title
 
 
 class Comment(models.Model):
