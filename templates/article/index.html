@@ -159,8 +159,7 @@
                         <div class="post_text_1 pr_30">
                             <p><span> By {{ last_article.author.name }}</span> / {{ last_article.created_date|date:"F d, Y" }}</p>
                             <a href="{% url 'article:detail' last_article.slug %}">
-                                <h3>Subdue lesser beast winged
-                                    bearing meat tree one</h3>
+                                <h3>{{ last_article.title|slice:"40" }}</h3>
                             </a>
                         </div>
                     </div>

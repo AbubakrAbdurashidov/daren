@@ -40,7 +40,7 @@ class ArticleAdmin(admin.ModelAdmin):
     inlines = [ArticleContentAdminTabularInline]
     list_display = ('id', 'title', 'created_date', )
     search_fields = ('title', )
-    list_filter = ('created_date', 'tags', )
+    list_filter = ('created_date', )
     list_display_links = ('title',)
     date_hierarchy = 'created_date'
     readonly_fields = ('created_date', 'slug')

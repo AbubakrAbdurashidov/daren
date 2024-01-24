@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% regroup items by categories as grouped_items %}
+
 
 
 {% block content %}
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-8">
-                    {% for object in object_list %}
+                    {% for object in page_obj %}
                     	 <div class="single_post media post_3">
                         <div class="single_post_img">
                             <img src="{{ object.image.url }}" alt>
@@ -34,7 +34,7 @@
                         <div class="post_text_1 media-body align-self-center">
                             <p><span> By {{ object.author.name }}</span> / {{ object.created_date|date:"F d, Y" }}</p>
                             <a href="{% url 'article:detail' object.slug %}">
-                                <h3>{{ object.title }}</h3>
+                                <h3>{{ object.title|slice:"70" }}...</h3>
                             </a>
                             <div class="post_icon">
                                 <ul>
@@ -47,9 +47,39 @@
                     </div>
                     {% endfor %}
 
-                    <div class="load_btn text-center">
-                        <a href="#" class="btn_1">LOADING MORE <i class="ti-angle-right"></i></a>
-                    </div>
+                <div class="demo">
+    <nav class="pagination-outer" aria-label="Page navigation">
+        <ul class="pagination">
+            <li class="page-item">
+                {% if page_obj.has_previous %}
+                	<a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+                    <span aria-hidden="true">«</span>
+                </a>
+                {% endif %}
+            </li>
+
+
+
+            {% for page_number in page_obj.paginator.page_range %}
+            	 <li class="{% if page_obj.number == page_number %}active{% endif %}"><a class="page-link" href="?page={{ page_number }}">{{ page_number }}</a></li>
+            {% endfor %}
+
+
+
+
+
+            <li class="page-item">
+                {% if page_obj.has_next %}
+                	<a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Next">
+                    <span aria-hidden="true">»</span>
+                </a>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
+</div>
+
+
                 </div>
                 <div class="col-lg-4">
                 <div class="sidebar_widget">
@@ -81,8 +111,7 @@
                         <div class="post_text_1 pr_30">
                             <p><span> By {{ last_article.author.name }}</span> / {{ last_article.created_date|date:"F d, Y" }}</p>
                             <a href="{% url 'article:detail' last_article.slug %}">
-                                <h3>Subdue lesser beast winged
-                                    bearing meat tree one</h3>
+                                <h3>{{ last_article.title|slice:"40" }}</h3>
                             </a>
                         </div>
                     </div>
@@ -112,6 +141,11 @@
             </div>
             </div>
         </div>
+
+
+
+
+
     </section>
 
 

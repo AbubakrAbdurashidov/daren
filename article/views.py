@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, Category, Tag
+from .models import Article, Category, Tag, Author
 from .forms import CommentForm
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
@@ -82,6 +82,9 @@ def article_detail(request, slug):
 
 def article_category(request):
     articles = Article.objects.order_by('-id')
+    paginator = Paginator(articles, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
     last_articles = Article.objects.order_by('-id')[:3]
     tag = request.GET.get('tag')
     cat = request.GET.get('cat')
@@ -89,14 +92,14 @@ def article_category(request):
     q = request.GET.get('q')
     categories = Category.objects.all()
     if q:
-        articles = articles.filter(title__icontains=q)
+        page_obj = articles.filter(title__icontains=q)
     if cat:
-        articles = articles.filter(category__title__exact=cat)
-
+        page_obj = articles.filter(category__title__exact=cat)
     if tag:
-        articles = articles.filter(tags__title__exact=tag)
+        page_obj = articles.filter(tags__title__exact=tag)
     ctx = {
         'object_list': articles,
+        'page_obj': page_obj,
         'tags': tags,
         'last_articles': last_articles,
         'categories': categories
@@ -105,8 +108,10 @@ def article_category(request):
 
 
 def article_archive(request):
-    page = request.GET.get('page')
     articles = Article.objects.order_by('-id')
+    paginator = Paginator(articles, 8)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
     last_articles = Article.objects.order_by('-id')[:3]
     cat = request.GET.get('cat')
     tag = request.GET.get('tag')
@@ -114,16 +119,12 @@ def article_archive(request):
     tags = Tag.objects.all()
     categories = Category.objects.all()
     if q:
-        articles = articles.filter(title__icontains=q)
+        page_obj = articles.filter(title__icontains=q)
     if cat:
-        articles = articles.filter(category__title__exact=cat)
+        page_obj = articles.filter(category__title__exact=cat)
 
     if tag:
-        articles = articles.filter(tags__title__exact=tag)
-
-    paginator = Paginator(articles, 3)
-    page_obj = paginator.get_page(page)
-
+        page_obj = articles.filter(tags__title__exact=tag)
     ctx = {
         'page_obj': page_obj,
         'object_list': articles,
