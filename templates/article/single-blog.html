@@ -4,249 +4,263 @@
 
 {% block content %}
 
-<section class="breadcrumb breadcrumb_bg">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="breadcrumb_iner text-center">
-                    <div class="breadcrumb_iner_item">
-                        <h2>Blog Single</h2>
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb_iner text-center">
+                        <div class="breadcrumb_iner_item">
+                            <h2>Blog Single</h2>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
-<section class="blog_area single-post-area all_post section_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 posts-list">
-                <div class="single-post">
-                    <div class="feature-img">
-                        <img class="img-fluid" src="{{ object.image.url }}" alt>
-                    </div>
-                    <div class="blog_details">
-                        <h2>{{ object.title|safe }}
-                        </h2>
-                        <ul class="blog-info-link mt-3 mb-4">
-                            {% for tags in object.tags.all %}
-                            	<li><a href="#"><i class="far fa-user"></i> {{ tags.title }}</a></li>
-                            {% endfor %}
+    <section class="blog_area single-post-area all_post section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 posts-list">
+                    <div class="single-post">
+                        <div class="feature-img">
+                            <img class="img-fluid" src="{{ object.image.url }}" alt>
+                        </div>
+                        <div class="blog_details">
+                            <h2>{{ object.title|safe }}
+                            </h2>
+                            <ul class="blog-info-link mt-3 mb-4">
+                                {% for tags in object.tags.all %}
+                                    <li><a href="#"><i class="far fa-user"></i> {{ tags.title }}</a></li>
+                                {% endfor %}
 
-                            <li><a href="#"><i class="far fa-comments"></i>{{ object.comments.count }} comments</a></li>
-                        </ul>
-                        {% for article_content in object.ArticleContent.all %}
+                                <li><a href="#"><i class="far fa-comments"></i>{{ object.comments.count }} comments</a>
+                                </li>
+                            </ul>
+                            {% for article_content in object.ArticleContent.all %}
 
 
 
-                        {% if article_content.is_quote %}
-                        	<div class="quote-wrapper">
-                                <div class="quotes">
+                                {% if article_content.is_quote %}
+                                    <div class="quote-wrapper">
+                                        <div class="quotes">
+                                            {{ article_content.content|safe }}
+                                        </div>
+                                    </div>
+                                {% else %}
                                     {{ article_content.content|safe }}
-                                </div>
-                            </div>
-                        {% else %}
-                            {{ article_content.content|safe }}
-                        {% endif %}
+                                {% endif %}
 
 
 
-                        {% endfor %}
-                    </div>
-                </div>
-                <div class="navigation-top">
-                    <div class="d-sm-flex justify-content-between text-center">
-                        <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and 4
-                            people like this</p>
-                        <div class="col-sm-4 text-center my-2 my-sm-0">
-
-                        </div>
-                        <ul class="social-icons">
-                            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fab fa-behance"></i></a></li>
-                        </ul>
-                    </div>
-                    <div class="navigation-area">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/preview.png' %}" alt>
-                                    </a>
-                                </div>
-                                <div class="arrow">
-                                    <a href="#">
-                                        <span class="text-white ti-arrow-left"></span>
-                                    </a>
-                                </div>
-                                <div class="detials">
-                                    <p>Prev Post</p>
-                                    <a href="#">
-                                        <h4>Space The Final Frontier</h4>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
-                                <div class="detials">
-                                    <p>Next Post</p>
-                                    <a href="#">
-                                        <h4>Telescopes 101</h4>
-                                    </a>
-                                </div>
-                                <div class="arrow">
-                                    <a href="#">
-                                        <span class="text-white ti-arrow-right"></span>
-                                    </a>
-                                </div>
-                                <div class="thumb">
-                                    <a href="#">
-                                        <img class="img-fluid" src="{% static 'img/post/next.png' %}" alt>
-                                    </a>
-                                </div>
-                            </div>
+                            {% endfor %}
                         </div>
                     </div>
-                </div>
-                <div class="blog-author" id="redirect_window">
-                    <div class="media align-items-center">
-                        <img src="{{ object.author.image.url }}" alt>
-                        <div class="media-body">
+                    <div class="navigation-top">
+                        <div class="d-sm-flex justify-content-between text-center">
+                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and
+                                4
+                                people like this</p>
+                            <div class="col-sm-4 text-center my-2 my-sm-0">
 
+                            </div>
+                            <ul class="social-icons">
+                                <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                                <li><a href="#"><i class="fab fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fab fa-dribbble"></i></a></li>
+                                <li><a href="#"><i class="fab fa-behance"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="navigation-area">
+                            <div class="row">
+                                        <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                    {% if prev_item %}
+                                            <div class="thumb">
+                                                <a href="{% url 'article:detail' prev_item.slug %}">
+                                                    <img class="img-fluid" src="{{ prev_item.image.url }}" alt>
+                                                </a>
+                                            </div>
+                                            <div class="arrow">
+                                                <a href="#">
+                                                    <span class="text-white ti-arrow-left"></span>
+                                                </a>
+                                            </div>
+                                            <div class="detials">
+                                                <p>Prev Post</p>
+                                                <a href="{% url 'article:detail' prev_item.slug %}">
+                                                    <h4>{{ prev_item.title|slice:"20" }}</h4>
+                                                </a>
+                                            </div>
+                                    {% endif %}
+                                        </div>
 
-                                    <h4><a href="{% url 'article:archive' %}?author={{ object.author.name }}">{{ object.author.name }} </a></h4>
+                                        <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                                    {% if next_item %}
+                                            <div class="detials">
+                                                <p>Next Post</p>
+                                                <a href="{% url 'article:detail' next_item.slug %}">
+                                                    <h4>{{ next_item.title|slice:"20" }}</h4>
+                                                </a>
+                                            </div>
+                                            <div class="arrow">
+                                                <a href="{% url 'article:detail' next_item.slug %}">
+                                                    <span class="text-white ti-arrow-right"></span>
+                                                </a>
+                                            </div>
+                                            <div class="thumb">
+                                                <a href="{% url 'article:detail' next_item.slug %}">
+                                                    <img class="img-fluid" src="{{ next_item.image.url }}" alt>
+                                                </a>
+                                            </div>
+                                    {% endif %}
+                                        </div>
 
-
-
-                            <p>{{ object.author.bio }}</p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="comments-area">
-                    <h4>{{ object.comments.count }} Comments</h4>
-                    {% for comment in object.comments.all %}
-                    	<div class="comment-list">
-                        <div class="single-comment justify-content-between d-flex">
-                            <div class="user justify-content-between d-flex">
-                                <div class="thumb">
-                                    <img src="{{ comment.image.url }}" alt>
-                                </div>
-                                <div class="desc">
-                                    <p class="comment">
-                                        {{ comment.message }}
-                                    </p>
-                                    <div class="d-flex justify-content-between">
-                                        <div class="d-flex align-items-center">
-                                            <h5>
-                                                <a href="#">{{ comment.name }}</a>
-                                            </h5>
-                                            <p class="date">{{ comment.created_date|date:"F d, Y \a\t h:m A " }} </p>
+                    <div class="blog-author" id="redirect_window">
+                        <div class="media align-items-center">
+                            <img src="{{ object.author.image.url }}" alt>
+                            <div class="media-body">
+
+
+                                <h4>
+                                    <a href="{% url 'article:archive' %}?author={{ object.author.name }}">{{ object.author.name }} </a>
+                                </h4>
+
+
+                                <p>{{ object.author.bio }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="comments-area">
+                        <h4>{{ object.comments.count }} Comments</h4>
+                        {% for comment in object.comments.all %}
+                            <div class="comment-list">
+                                <div class="single-comment justify-content-between d-flex">
+                                    <div class="user justify-content-between d-flex">
+                                        <div class="thumb">
+                                            <img src="{{ comment.image.url }}" alt>
+                                        </div>
+                                        <div class="desc">
+                                            <p class="comment">
+                                                {{ comment.message }}
+                                            </p>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="d-flex align-items-center">
+                                                    <h5>
+                                                        <a href="#">{{ comment.name }}</a>
+                                                    </h5>
+                                                    <p class="date">{{ comment.created_date|date:"F d, Y \a\t h:m A " }} </p>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    {% endfor %}
-
-                </div>
-                <div class="comment-form">
-                    <h4>Leave a Reply</h4>
-                    <form class="form-contact comment_form" id="commentForm" method="post" enctype="multipart/form-data">
-                         {% csrf_token %}
-                        <div class="row">
-                            <div class="col-12">
-                                <div class="form-group">
-                                   {{ form.message }}
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    {{ form.name }}
-                                </div>
-                            </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    {{ form.email }}
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-group">
-                                    {{ form.image }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="load_btn">
-                            <input type="submit" class="btn_1" value="SUBMIT   >">
-                        </div>
-                    </form>
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="sidebar_widget">
-                    <div class="sidebar_tittle">
-                        <h3>Search Objects</h3>
-                    </div>
-                    <form >
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="q" placeholder="Search Keyword"
-                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                                <div class="input-group-append">
-                                    <button class="btn" type="submit"><i class="ti-search"></i></button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                    <div class="sidebar_tittle">
-                        <h3>Popular Feeds</h3>
-                    </div>
-
-                      {% for last_article in last_articles %}
-                        	<div class="single_catagory_post post_2 single_border_bottom">
-                        <div class="category_post_img">
-                            {% if last_article.image %}
-                                <img src="{{ last_article.image.url }}" alt>
-                            {% endif %}
-                        </div>
-                        <div class="post_text_1 pr_30">
-                            <p><span> By {{ last_article.author.name }}</span> / {{ last_article.created_date|date:"F d, Y" }}</p>
-                            <a href="{% url 'article:detail' last_article.slug %}">
-                                <h3>Subdue lesser beast winged
-                                    bearing meat tree one</h3>
-                            </a>
-                        </div>
-                    </div>
                         {% endfor %}
 
-                    <div class="sidebar_tittle">
-                        <h3>Categories</h3>
                     </div>
-                    <div class="single_catagory_item category">
-                        <ul class="list-unstyled">
-                            {% for category in categories %}
-                            	<li><a href="{% url 'article:category' %}?cat={{ category.title }}">{{ category.title }}({{ category.article_set.count }})</a></li>
-                            {% endfor %}
-                        </ul>
+                    <div class="comment-form">
+                        <h4>Leave a Reply</h4>
+                        <form class="form-contact comment_form" id="commentForm" method="post"
+                              enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        {{ form.message }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {{ form.name }}
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="form-group">
+                                        {{ form.image }}
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="load_btn">
+                                <input type="submit" class="btn_1" value="SUBMIT   >">
+                            </div>
+                        </form>
                     </div>
-                    <div class="sidebar_tittle">
-                        <h3>Popular Tags</h3>
-                    </div>
-                    <div class="single_catagory_item tags">
-                        <ul class="list-unstyled">
-                            {% for tag in tags %}
-                            	<li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}</a></li>
-                            {% endfor %}
-                        </ul>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar_widget">
+                        <div class="sidebar_tittle">
+                            <h3>Search Objects</h3>
+                        </div>
+                        <form>
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="q" placeholder="Search Keyword"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                                    <div class="input-group-append">
+                                        <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="sidebar_tittle">
+                            <h3>Popular Feeds</h3>
+                        </div>
+
+                        {% for last_article in last_articles %}
+                            <div class="single_catagory_post post_2 single_border_bottom">
+                                <div class="category_post_img">
+                                    {% if last_article.image %}
+                                        <img src="{{ last_article.image.url }}" alt>
+                                    {% endif %}
+                                </div>
+                                <div class="post_text_1 pr_30">
+                                    <p><span> By {{ last_article.author.name }}</span>
+                                        / {{ last_article.created_date|date:"F d, Y" }}</p>
+                                    <a href="{% url 'article:detail' last_article.slug %}">
+                                        <h3>Subdue lesser beast winged
+                                            bearing meat tree one</h3>
+                                    </a>
+                                </div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="sidebar_tittle">
+                            <h3>Categories</h3>
+                        </div>
+                        <div class="single_catagory_item category">
+                            <ul class="list-unstyled">
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{% url 'article:category' %}?cat={{ category.title }}">{{ category.title }}({{ category.article_set.count }})</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar_tittle">
+                            <h3>Popular Tags</h3>
+                        </div>
+                        <div class="single_catagory_item tags">
+                            <ul class="list-unstyled">
+                                {% for tag in tags %}
+                                    <li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 {% endblock %}

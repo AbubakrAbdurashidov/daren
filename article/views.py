@@ -1,11 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, Category, Tag
 from .forms import CommentForm
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
 def article_view(request):
-    page = request.GET.get('page')
     tag = request.GET.get('tag')
     cat = request.GET.get('cat')
     q = request.GET.get('q')
@@ -15,7 +14,7 @@ def article_view(request):
     last_articles = Article.objects.order_by('-id')[:3]
     object_articles = Article.objects.all()[:3]
     categories = Category.objects.all()
-    articles = Article.objects.order_by('-id')
+    articles = Article.objects.order_by('-id')[:6]
     if q:
         articles = articles.filter(title__icontains=q)
     if cat:
@@ -47,6 +46,8 @@ def article_detail(request, slug):
     last_articles = Article.objects.order_by('-id')[:3]
     tags = Tag.objects.all()
     form = CommentForm()
+    prev_item = Article.objects.filter(slug__lt=slug).last()
+    next_item = Article.objects.filter(slug__gt=slug).first()
     if q:
         articles = articles.filter(title__icontains=q)
     if cat:
@@ -71,7 +72,9 @@ def article_detail(request, slug):
         'author': author,
         'tags': tags,
         'categories': categories,
-        'last_articles': last_articles
+        'last_articles': last_articles,
+        'prev_item': prev_item,
+        'next_item': next_item,
 
     }
     return render(request, 'article/single-blog.html', ctx)
@@ -102,6 +105,7 @@ def article_category(request):
 
 
 def article_archive(request):
+    page = request.GET.get('page')
     articles = Article.objects.order_by('-id')
     last_articles = Article.objects.order_by('-id')[:3]
     cat = request.GET.get('cat')
@@ -117,7 +121,11 @@ def article_archive(request):
     if tag:
         articles = articles.filter(tags__title__exact=tag)
 
+    paginator = Paginator(articles, 3)
+    page_obj = paginator.get_page(page)
+
     ctx = {
+        'page_obj': page_obj,
         'object_list': articles,
         'tags': tags,
         'categories': categories,

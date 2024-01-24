@@ -1097,6 +1097,8 @@ ul {
 
 /* line 1242, E:/168 Daren Blog/168_Daren_Blog_html/sass/_blog.scss */
 .single-post-area .navigation-area .nav-left .thumb img {
+  height: 60px;
+  width: 60px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
@@ -1139,6 +1141,8 @@ ul {
 
 /* line 1277, E:/168 Daren Blog/168_Daren_Blog_html/sass/_blog.scss */
 .single-post-area .navigation-area .nav-right .thumb img {
+  width: 60px;
+  height: 60px;
   -webkit-transition: 0.5s;
   transition: 0.5s;
 }
