@@ -33,7 +33,7 @@
                         <ul>
                             <li>
                                 <div id="wrap">
-                                    <form autocomplete="on">
+                                    <form autocomplete="on" action="{% url 'article:archive' %}" method="get">
                                         <input id="search" name="q"  type="text" placeholder="Search here"><span
                                             class="ti-search"></span>
                                     </form>

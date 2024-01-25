@@ -134,7 +134,7 @@
                     <div class="sidebar_tittle">
                         <h3>Search Objects</h3>
                     </div>
-                    <form >
+                    <form action="{% url 'article:archive' %}" method="get">
                         <div class="form-group">
                             <div class="input-group mb-3">
                                 <input type="text" class="form-control" name="q" placeholder="Search Keyword"
