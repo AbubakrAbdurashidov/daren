@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Article, Category, Tag, Author
 from .forms import CommentForm
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator
 
 
 def article_view(request):
@@ -14,7 +14,8 @@ def article_view(request):
     last_articles = Article.objects.order_by('-id')[:3]
     object_articles = Article.objects.all()[:3]
     categories = Category.objects.all()
-    articles = Article.objects.order_by('-id')[:6]
+    bottom_articles = Article.objects.order_by('-id')[:6]
+    articles = Article.objects.order_by('-id')
     if q:
         articles = articles.filter(title__icontains=q)
     if cat:
@@ -29,6 +30,7 @@ def article_view(request):
         'banner_article': banner_article,
         'tags': tags,
         'categories': categories,
+        'bottom_articles': bottom_articles,
         'last_articles': last_articles,
         'object': object_articles
     }
@@ -37,6 +39,7 @@ def article_view(request):
 
 def article_detail(request, slug):
     article = get_object_or_404(Article, slug=slug)
+    user = request.user
     articles = Article.objects.order_by('-id')
     tag = request.GET.get('tag')
     cat = request.GET.get('cat')
@@ -65,12 +68,14 @@ def article_detail(request, slug):
             obj.article = article
             obj.save()
             return redirect('.#redirect_window')
+
     ctx = {
         'object_list': articles,
         'object': article,
         'form': form,
         'author': author,
         'tags': tags,
+        'user': user,
         'categories': categories,
         'last_articles': last_articles,
         'prev_item': prev_item,

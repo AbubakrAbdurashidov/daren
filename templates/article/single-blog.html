@@ -57,14 +57,15 @@
                             {% endfor %}
                         </div>
                     </div>
+
                     <div class="navigation-top">
+
                         <div class="d-sm-flex justify-content-between text-center">
-                            <p class="like-info"><span class="align-middle"><i class="far fa-heart"></i></span> Lily and
-                                4
-                                people like this</p>
+
                             <div class="col-sm-4 text-center my-2 my-sm-0">
 
                             </div>
+
                             <ul class="social-icons">
                                 <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
                                 <li><a href="#"><i class="fab fa-twitter"></i></a></li>
@@ -74,47 +75,47 @@
                         </div>
                         <div class="navigation-area">
                             <div class="row">
-                                        <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
+                                <div class="col-lg-6 col-md-6 col-12 nav-left flex-row d-flex justify-content-start align-items-center">
                                     {% if prev_item %}
-                                            <div class="thumb">
-                                                <a href="{% url 'article:detail' prev_item.slug %}">
-                                                    <img class="img-fluid" src="{{ prev_item.image.url }}" alt>
-                                                </a>
-                                            </div>
-                                            <div class="arrow">
-                                                <a href="#">
-                                                    <span class="text-white ti-arrow-left"></span>
-                                                </a>
-                                            </div>
-                                            <div class="detials">
-                                                <p>Prev Post</p>
-                                                <a href="{% url 'article:detail' prev_item.slug %}">
-                                                    <h4>{{ prev_item.title|slice:"20" }}</h4>
-                                                </a>
-                                            </div>
-                                    {% endif %}
+                                        <div class="thumb">
+                                            <a href="{% url 'article:detail' prev_item.slug %}">
+                                                <img class="img-fluid" src="{{ prev_item.image.url }}" alt>
+                                            </a>
                                         </div>
+                                        <div class="arrow">
+                                            <a href="#">
+                                                <span class="text-white ti-arrow-left"></span>
+                                            </a>
+                                        </div>
+                                        <div class="detials">
+                                            <p>Prev Post</p>
+                                            <a href="{% url 'article:detail' prev_item.slug %}">
+                                                <h4>{{ prev_item.title|slice:"20" }}</h4>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
 
-                                        <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
+                                <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                                     {% if next_item %}
-                                            <div class="detials">
-                                                <p>Next Post</p>
-                                                <a href="{% url 'article:detail' next_item.slug %}">
-                                                    <h4>{{ next_item.title|slice:"20" }}</h4>
-                                                </a>
-                                            </div>
-                                            <div class="arrow">
-                                                <a href="{% url 'article:detail' next_item.slug %}">
-                                                    <span class="text-white ti-arrow-right"></span>
-                                                </a>
-                                            </div>
-                                            <div class="thumb">
-                                                <a href="{% url 'article:detail' next_item.slug %}">
-                                                    <img class="img-fluid" src="{{ next_item.image.url }}" alt>
-                                                </a>
-                                            </div>
-                                    {% endif %}
+                                        <div class="detials">
+                                            <p>Next Post</p>
+                                            <a href="{% url 'article:detail' next_item.slug %}">
+                                                <h4>{{ next_item.title|slice:"20" }}</h4>
+                                            </a>
                                         </div>
+                                        <div class="arrow">
+                                            <a href="{% url 'article:detail' next_item.slug %}">
+                                                <span class="text-white ti-arrow-right"></span>
+                                            </a>
+                                        </div>
+                                        <div class="thumb">
+                                            <a href="{% url 'article:detail' next_item.slug %}">
+                                                <img class="img-fluid" src="{{ next_item.image.url }}" alt>
+                                            </a>
+                                        </div>
+                                    {% endif %}
+                                </div>
 
                             </div>
                         </div>
@@ -250,7 +251,8 @@
                         <div class="single_catagory_item tags">
                             <ul class="list-unstyled">
                                 {% for tag in tags %}
-                                    <li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}</a>
+                                    <li>
+                                        <a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}({{ tag.article_set.count }})</a>
                                     </li>
                                 {% endfor %}
                             </ul>

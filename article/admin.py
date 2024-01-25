@@ -5,7 +5,7 @@ from .models import (
     Tag,
     Author,
     Comment,
-    ArticleContent
+    ArticleContent,
 )
 
 
@@ -47,6 +47,9 @@ class ArticleAdmin(admin.ModelAdmin):
     save_on_top = True
     filter_horizontal = ('tags',)
     # prepopulated_fields = {'slug': ('title',)}
+
+
+
 
 
 @admin.register(Comment)

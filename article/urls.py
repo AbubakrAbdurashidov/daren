@@ -12,5 +12,5 @@ urlpatterns = [
     path('', article_view,  name='view'),
     path('article/detail/<slug:slug>/', article_detail, name='detail'),
     path('article/category/', article_category, name='category'),
-    path('article/archive/', article_archive, name='archive')
+    path('article/archive/', article_archive, name='archive'),
 ]

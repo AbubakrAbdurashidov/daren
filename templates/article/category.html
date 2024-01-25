@@ -133,7 +133,7 @@
                     <div class="single_catagory_item tags">
                         <ul class="list-unstyled">
                             {% for tag in tags %}
-                            	<li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}</a></li>
+                            	<li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}({{ tag.article_set.count }})</a></li>
                             {% endfor %}
                         </ul>
                     </div>

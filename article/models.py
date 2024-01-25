@@ -7,6 +7,7 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 
 
+
 class Category(models.Model):
     title = models.CharField(max_length=255)
 

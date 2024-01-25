@@ -51,7 +51,7 @@
                         <div class="post_icon">
                             <ul>
                                 <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
-                                <li><i class="ti-heart"></i>0 Like</li>
+                                <li><i class="ti-heart"></i>{{ object.like.count }} Like</li>
                                 <li><i class="ti-export"></i>Share</li>
                             </ul>
                         </div>
@@ -104,7 +104,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8">
-                {% for object in object_list %}
+                {% for object in bottom_articles %}
                     	 <div class="single_post media post_3">
                         <div class="single_post_img">
                             <img src="{{ object.image.url }}" alt>
@@ -181,7 +181,7 @@
                     <div class="single_catagory_item tags">
                         <ul class="list-unstyled">
                             {% for tag in tags %}
-                            	<li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}</a></li>
+                            	<li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}({{ tag.article_set.count }})</a></li>
                             {% endfor %}
                         </ul>
                     </div>
