@@ -38,17 +38,19 @@ class ArticleContentAdminTabularInline(admin.TabularInline):
 @admin.register(Article)
 class ArticleAdmin(admin.ModelAdmin):
     inlines = [ArticleContentAdminTabularInline]
-    list_display = ('id', 'title', 'created_date', )
+    list_display = ('id', 'get_title', 'created_date', )
     search_fields = ('title', )
     list_filter = ('created_date', )
-    list_display_links = ('title',)
+    list_display_links = ('get_title',)
     date_hierarchy = 'created_date'
     readonly_fields = ('created_date', 'slug')
     save_on_top = True
     filter_horizontal = ('tags',)
     # prepopulated_fields = {'slug': ('title',)}
 
+    def get_title(self, obj):
 
+        return obj.title[:50]
 
 
 

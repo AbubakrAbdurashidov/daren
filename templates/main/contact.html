@@ -18,6 +18,61 @@
         </div>
     </section>
 
+    <style>
+    #django-messages div[class^=message] {
+  width: 100%;
+  padding: 40px 15px;
+  border-radius: 8px;
+  border: 2px solid;
+  color: #fff;
+  font-weight: 700;
+  line-height: 18px;
+  z-index: 999;
+}
+#django-messages {
+  position: sticky !important;
+  z-index: 4;
+  overflow: hidden;
+}
+#django-messages .message-success {
+  background-color: forestgreen;
+  border-color: darkgreen;
+}
+#django-messages .message-error {
+  background-color: red;
+  border-color: darkred;
+}
+.hide {
+  animation-name: hide_slide_show;
+  animation-duration: 2s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes hide_slide_show {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+}
+    </style>
+
+
+    {% if messages %}
+    <div id="django-messages" class="">
+        {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="message-success">{{ message }}</div>
+            {% elif message.tags == 'error' %}
+                <div class="message-danger">{{ message }}</div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endif %}
+
 
     <section class="contact-section section_padding">
         <div class="container">
@@ -91,5 +146,16 @@
         </div>
     </section>
 
-
 {% endblock %}
+
+    {% block js %}
+<script>
+    $(document).ready(function () {
+      setTimeout(function () {
+        $('#django-messages').addClass('hide');
+      }, 3000);
+    });
+</script>
+{% endblock %}
+
+
