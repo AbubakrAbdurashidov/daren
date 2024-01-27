@@ -5,7 +5,7 @@
 {% block content %}
 
     <section class="breadcrumb breadcrumb_bg">
-        <div class="container">
+        <div class="container" id="blog_single">
             <div class="row">
                 <div class="col-lg-12">
                     <div class="breadcrumb_iner text-center">
@@ -17,6 +17,55 @@
             </div>
         </div>
     </section>
+
+
+    <style>
+        #django-messages div[class^=message] {
+            width: 100%;
+            padding: 40px 15px;
+            border-radius: 8px;
+            border: 2px solid;
+            color: #fff;
+            font-weight: 700;
+            line-height: 18px;
+            z-index: 999;
+        }
+
+        #django-messages {
+            position: sticky !important;
+            z-index: 4;
+            overflow: hidden;
+        }
+
+        #django-messages .message-success {
+            background-color: forestgreen;
+            border-color: darkgreen;
+        }
+
+        #django-messages .message-error {
+            background-color: red;
+            border-color: darkred;
+        }
+
+        .hide {
+            animation-name: hide_slide_show;
+            animation-duration: 2s;
+            animation-fill-mode: forwards;
+        }
+
+        @keyframes hide_slide_show {
+            from {
+                opacity: 1;
+            }
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+
+        }
+    </style>
+
+
 
 
     <section class="blog_area single-post-area all_post section_padding">
@@ -135,6 +184,19 @@
                             </div>
                         </div>
                     </div>
+
+                    {% if messages %}
+                        <div id="django-messages" class="">
+                            {% for message in messages %}
+                                {% if message.tags == 'success' %}
+                                    <div class="message-success">{{ message }}</div>
+                                {% elif message.tags == 'error' %}
+                                    <div class="message-danger">{{ message }}</div>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+
                     <div class="comments-area">
                         <h4>{{ object.comments.count }} Comments</h4>
                         {% for comment in object.comments.all %}
@@ -142,7 +204,10 @@
                                 <div class="single-comment justify-content-between d-flex">
                                     <div class="user justify-content-between d-flex">
                                         <div class="thumb">
-                                            <img src="{{ comment.image.url }}" alt>
+                                            <img src="
+
+                                                    {% if comment.image %}{{ comment.image.url }}{% else %}{% static 'img/comment/klipartz.com.png' %}{% endif %}"
+                                                 alt>
                                         </div>
                                         <div class="desc">
                                             <p class="comment">
@@ -151,9 +216,14 @@
                                             <div class="d-flex justify-content-between">
                                                 <div class="d-flex align-items-center">
                                                     <h5>
-                                                        <a href="#">{{ comment.name }}</a>
+                                                        <a href="#">
+                                                            {% if comment.name %}{{ comment.name }}{% else %}
+                                                                Anonymous user{% endif %}</a>
                                                     </h5>
                                                     <p class="date">{{ comment.created_date|date:"F d, Y \a\t h:m A " }} </p>
+                                                </div>
+                                                <div class="reply-btn">
+                                                    <a href="#" class="btn-reply text-uppercase">reply</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -264,4 +334,15 @@
     </section>
 
 
+{% endblock %}
+
+
+{% block js %}
+    <script>
+        $(document).ready(function () {
+            setTimeout(function () {
+                $('#django-messages').addClass('hide');
+            }, 3000);
+        });
+    </script>
 {% endblock %}

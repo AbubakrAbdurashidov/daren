@@ -7,7 +7,6 @@ from django.db.models.signals import pre_save
 from django.utils import timezone
 
 
-
 class Category(models.Model):
     title = models.CharField(max_length=255)
 
@@ -59,9 +58,9 @@ class ArticleContent(models.Model):
 
 class Comment(models.Model):
     article = models.ForeignKey(Article, on_delete=models.CASCADE, related_name='comments')
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255,  null=True, blank=True)
     email = models.EmailField(max_length=255, null=True, blank=True)
-    image = models.ImageField(upload_to='media/comments', null=True)
+    image = models.ImageField(upload_to='media/comments', null=True, blank=True)
     message = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
 

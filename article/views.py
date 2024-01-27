@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, Category, Tag, Author
+from .models import Article, Category, Tag
 from .forms import CommentForm
 from django.core.paginator import Paginator
+from django.contrib import messages
 
 
 def article_view(request):
@@ -67,6 +68,7 @@ def article_detail(request, slug):
             obj = form.save(commit=False)
             obj.article = article
             obj.save()
+            messages.success(request, 'Your message successfully sent')
             return redirect('.#redirect_window')
 
     ctx = {
