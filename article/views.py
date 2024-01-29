@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Article, Category, Tag
+from .models import Article, Category, Tag, Comment
 from .forms import CommentForm
 from django.core.paginator import Paginator
 from django.contrib import messages
@@ -51,6 +51,7 @@ def article_detail(request, slug):
     tags = Tag.objects.all()
     form = CommentForm()
     prev_item = Article.objects.filter(slug__lt=slug).last()
+    parent_id = request.GET.get('p_id')
     next_item = Article.objects.filter(slug__gt=slug).first()
     if q:
         articles = articles.filter(title__icontains=q)
@@ -67,6 +68,8 @@ def article_detail(request, slug):
         if form.is_valid():
             obj = form.save(commit=False)
             obj.article = article
+            if parent_id:
+                obj.parent_comment = Comment.objects.get(id=parent_id)
             obj.save()
             messages.success(request, 'Your message successfully sent')
             return redirect('.#redirect_window')
