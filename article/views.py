@@ -98,6 +98,7 @@ def article_category(request):
     last_articles = Article.objects.order_by('-id')[:3]
     tag = request.GET.get('tag')
     cat = request.GET.get('cat')
+    txt = "Categories"
     tags = Tag.objects.all()
     q = request.GET.get('q')
     categories = Category.objects.all()
@@ -105,6 +106,7 @@ def article_category(request):
         page_obj = articles.filter(title__icontains=q)
     if cat:
         page_obj = articles.filter(category__title__exact=cat)
+        txt = cat
     if tag:
         page_obj = articles.filter(tags__title__exact=tag)
     ctx = {
@@ -112,7 +114,8 @@ def article_category(request):
         'page_obj': page_obj,
         'tags': tags,
         'last_articles': last_articles,
-        'categories': categories
+        'categories': categories,
+        'title': txt
     }
     return render(request, 'article/category.html', ctx)
 
