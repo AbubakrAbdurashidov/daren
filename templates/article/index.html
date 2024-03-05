@@ -3,193 +3,210 @@
 
 
 {% block content %}
-<section class="banner_post">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-12">
-                {% for banner_article in banner_articles %}
-                	<div class="banner_post_1 banner_post_bg_1">
-                    <div class="banner_post_iner text-center">
-                        <a href="{% url 'article:category' %}?cat={{ category.title }}"><h5>{{ banner_article.category.title }}</h5></a>
-                        <a href="{% url 'article:detail' banner_article.slug %}"><h2>{{ banner_article.title|slice:"40" }}...
-                             </h2></a>
-                        <p><span> By {{ banner_article.author.name }}</span> / {{ banner_article.created_date|date:"F d, Y" }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-
-                {% for banner_article in banner_article %}
-                	<div class="banner_post_2 banner_post_bg_2">
-                    <div class="banner_post_iner">
-                        <a href="{% url 'article:category' %}?cat={{ category.title }}"><h5> {{ banner_article.category.title }}</h5></a>
-                        <a href="{% url 'article:detail' banner_article.slug %}"><h2>{{ banner_article.title|slice:"70" }}...</h2></a>
-                        <p><span> By {{ banner_article.author.name }}</span> / {{ banner_article.created_date|date:"F d, Y" }}</p>
-                    </div>
-                </div>
-                {% endfor %}
-
-
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<section class="feature_post">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                {% for object in last_articles %}
-                	<div class="single_feature_post post_1">
-                    <img src="{{ object.image.url }}" alt>
-                    <div class="post_text_1 pr_30">
-                        <h5>{{ object.category }}</h5>
-                        <a href="{% url 'article:detail' object.slug %}">
-                            <h3>{{ object.title|safe|slice:"40" }}...</h3>
-                        </a>
-                        <p><span> By {{ object.author }}</span> / {{ object.created_date|date:"F  d , Y" }}</p>
-                        <div class="post_icon">
-                            <ul>
-                                <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
-                                <li><i class="ti-heart"></i>{{ object.like.count }} Like</li>
-                                <li><i class="ti-export"></i>Share</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                {% endfor %}
-            </div>
-        </div>
-    </div>
-</section>
-
-
-<div class="border_top"></div>
-
-
-<section class="catagory_post">
-    <div class="container">
-        <div class="row">
-            {% for object in object %}
-            	 <div class="col-sm-6 col-lg-4">
-                <div class="single_catagory_post post_2">
-                    <div class="category_post_img">
-                        <img src="{{ object.image.url }}" alt>
-                    </div>
-                    <div class="post_text_1 pr_30">
-                        <p><span> By {{ object.author }}</span> / {{ object.created_date|date:"F  d , Y" }}</p>
-                        <a href="{% url 'article:detail' object.slug %}">
-                            <h3>{{ object.title|safe|slice:"40" }}</h3>
-                        </a>
-                        <div class="post_icon">
-                            <ul>
-                                <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
-                                <li><i class="ti-heart"></i>0 Like</li>
-                                <li><i class="ti-export"></i>Share</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
-</section>
-
-
-<div class="border_top"></div>
-
-
-<section class="all_post section_padding">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8">
-                {% for object in bottom_articles %}
-                    	 <div class="single_post media post_3">
-                        <div class="single_post_img">
-                            <img src="{{ object.image.url }}" alt>
-                            <a href="{% url 'article:category' %}?cat={{ category.title }}" class="category_btn">{{ object.category.title }}</a>
-                        </div>
-                        <div class="post_text_1 media-body align-self-center">
-                            <p><span> By {{ object.author.name }}</span> / {{ object.created_date|date:"F d, Y" }}</p>
-                            <a href="{% url 'article:detail' object.slug %}">
-                                <h3>{{ object.title|slice:"70" }}</h3>
-                            </a>
-                            <div class="post_icon">
-                                <ul>
-                                    <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
-                                    <li><i class="ti-heart"></i>0 Like</li>
-                                    <li><i class="ti-export"></i>Share</li>
-                                </ul>
+    <section class="banner_post">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for banner_article in banner_articles %}
+                        <div class="banner_post_1 banner_post_bg_1">
+                            <div class="banner_post_iner text-center">
+                                <a href="{% url 'article:category' %}?cat={{ category.title }}">
+                                    <h5>{{ banner_article.category.title }}</h5></a>
+                                <a href="{% url 'article:detail' banner_article.slug %}">
+                                    <h2>{{ banner_article.title|slice:"40" }}...
+                                    </h2></a>
+                                <p><span> By {{ banner_article.author.name }}</span>
+                                    / {{ banner_article.created_date|date:"F d, Y" }}</p>
                             </div>
                         </div>
-                    </div>
                     {% endfor %}
-                <div class="load_btn text-center">
-                    <a href="{% url 'article:archive' %}" class="btn_1">LOADING MORE <i class="ti-angle-right"></i></a>
+
+                    {% for banner_article in banner_article %}
+                        <div class="banner_post_2 banner_post_bg_2">
+                            <div class="banner_post_iner">
+                                <a href="{% url 'article:category' %}?cat={{ category.title }}">
+                                    <h5> {{ banner_article.category.title }}</h5></a>
+                                <a href="{% url 'article:detail' banner_article.slug %}">
+                                    <h2>{{ banner_article.title|slice:"70" }}...</h2></a>
+                                <p><span> By {{ banner_article.author.name }}</span>
+                                    / {{ banner_article.created_date|date:"F d, Y" }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+
                 </div>
             </div>
-            <div class="col-lg-4">
-                <div class="sidebar_widget">
-                    <div class="sidebar_tittle">
-                        <h3>Search Objects</h3>
-                    </div>
-                    <form action="{% url 'article:archive' %}" method="get">
-                        <div class="form-group">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control" name="q" placeholder="Search Keyword"
-                                       onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
-                                <div class="input-group-append">
-                                    <button class="btn" type="submit"><i class="ti-search"></i></button>
+        </div>
+    </section>
+
+
+    <section class="feature_post">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    {% for object in last_articles %}
+                        <div class="single_feature_post post_1">
+                            {% if object.image %}
+                                <img src="{{ object.image.url }}" alt>
+                            {% endif %}
+                            <div class="post_text_1 pr_30">
+                                <h5>{{ object.category }}</h5>
+                                <a href="{% url 'article:detail' object.slug %}">
+                                    <h3>{{ object.title|safe|slice:"40" }}...</h3>
+                                </a>
+                                <p><span> By {{ object.author }}</span> / {{ object.created_date|date:"F  d , Y" }}</p>
+                                <div class="post_icon">
+                                    <ul>
+                                        <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
+                                        <li><i class="ti-heart"></i>{{ object.like.count }} Like</li>
+                                        <li><i class="ti-export"></i>Share</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                    </form>
-                    <div class="sidebar_tittle">
-                        <h3>Popular Feeds</h3>
-                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
 
-                      {% for last_article in last_articles %}
-                        	<div class="single_catagory_post post_2 single_border_bottom">
-                        <div class="category_post_img">
-                            {% if last_article.image %}
-                                <img src="{{ last_article.image.url }}" alt>
-                            {% endif %}
-                        </div>
-                        <div class="post_text_1 pr_30">
-                            <p><span> By {{ last_article.author.name }}</span> / {{ last_article.created_date|date:"F d, Y" }}</p>
-                            <a href="{% url 'article:detail' last_article.slug %}">
-                                <h3>{{ last_article.title|slice:"40" }}</h3>
-                            </a>
+
+    <div class="border_top"></div>
+
+
+    <section class="catagory_post">
+        <div class="container">
+            <div class="row">
+                {% for object in object %}
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="single_catagory_post post_2">
+                            <div class="category_post_img">
+                                <img src="{{ object.image.url }}" alt>
+                            </div>
+                            <div class="post_text_1 pr_30">
+                                <p><span> By {{ object.author }}</span> / {{ object.created_date|date:"F  d , Y" }}</p>
+                                <a href="{% url 'article:detail' object.slug %}">
+                                    <h3>{{ object.title|safe|slice:"40" }}</h3>
+                                </a>
+                                <div class="post_icon">
+                                    <ul>
+                                        <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
+                                        <li><i class="ti-heart"></i>0 Like</li>
+                                        <li><i class="ti-export"></i>Share</li>
+                                    </ul>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+
+    <div class="border_top"></div>
+
+
+    <section class="all_post section_padding">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    {% for object in bottom_articles %}
+                        <div class="single_post media post_3">
+                            <div class="single_post_img">
+                                {% if object.image %}
+                                    <img src="{{ object.image.url }}" alt>
+                                {% endif %}
+                                <a href="{% url 'article:category' %}?cat={{ category.title }}"
+                                   class="category_btn">{{ object.category.title }}</a>
+                            </div>
+                            <div class="post_text_1 media-body align-self-center">
+                                <p><span> By {{ object.author.name }}</span> / {{ object.created_date|date:"F d, Y" }}
+                                </p>
+                                <a href="{% url 'article:detail' object.slug %}">
+                                    <h3>{{ object.title|slice:"70" }}</h3>
+                                </a>
+                                <div class="post_icon">
+                                    <ul>
+                                        <li><i class="ti-comment"></i>{{ object.comments.count }} Comment</li>
+                                        <li><i class="ti-heart"></i>0 Like</li>
+                                        <li><i class="ti-export"></i>Share</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                    <div class="load_btn text-center">
+                        <a href="{% url 'article:archive' %}" class="btn_1">LOADING MORE <i class="ti-angle-right"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="sidebar_widget">
+                        <div class="sidebar_tittle">
+                            <h3>Search Objects</h3>
+                        </div>
+                        <form action="{% url 'article:archive' %}" method="get">
+                            <div class="form-group">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" name="q" placeholder="Search Keyword"
+                                           onfocus="this.placeholder = ''" onblur="this.placeholder = 'Search Keyword'">
+                                    <div class="input-group-append">
+                                        <button class="btn" type="submit"><i class="ti-search"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="sidebar_tittle">
+                            <h3>Popular Feeds</h3>
+                        </div>
+
+                        {% for last_article in last_articles %}
+                            <div class="single_catagory_post post_2 single_border_bottom">
+                                <div class="category_post_img">
+                                    {% if last_article.image %}
+                                        <img src="{{ last_article.image.url }}" alt>
+                                    {% endif %}
+                                </div>
+                                <div class="post_text_1 pr_30">
+                                    <p><span> By {{ last_article.author.name }}</span>
+                                        / {{ last_article.created_date|date:"F d, Y" }}</p>
+                                    <a href="{% url 'article:detail' last_article.slug %}">
+                                        <h3>{{ last_article.title|slice:"40" }}</h3>
+                                    </a>
+                                </div>
+                            </div>
                         {% endfor %}
 
-                    <div class="sidebar_tittle">
-                        <h3>Categories</h3>
-                    </div>
-                    <div class="single_catagory_item category">
-                        <ul class="list-unstyled">
-                            {% for category in categories %}
-                            	<li><a href="{% url 'article:category' %}?cat={{ category.title }}">{{ category.title }}({{ category.article_set.count }})</a></li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="sidebar_tittle">
-                        <h3>Popular Tags</h3>
-                    </div>
-                    <div class="single_catagory_item tags">
-                        <ul class="list-unstyled">
-                            {% for tag in tags %}
-                            	<li><a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}({{ tag.article_set.count }})</a></li>
-                            {% endfor %}
-                        </ul>
+                        <div class="sidebar_tittle">
+                            <h3>Categories</h3>
+                        </div>
+                        <div class="single_catagory_item category">
+                            <ul class="list-unstyled">
+                                {% for category in categories %}
+                                    <li>
+                                        <a href="{% url 'article:category' %}?cat={{ category.title }}">{{ category.title }}({{ category.article_set.count }})</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="sidebar_tittle">
+                            <h3>Popular Tags</h3>
+                        </div>
+                        <div class="single_catagory_item tags">
+                            <ul class="list-unstyled">
+                                {% for tag in tags %}
+                                    <li>
+                                        <a href="{% url 'article:archive' %}?tag={{ tag.title }}">{{ tag.title }}({{ tag.article_set.count }})</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 {% endblock %}
 
 

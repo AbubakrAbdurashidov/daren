@@ -19,9 +19,12 @@ from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 
+from article import api
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('main/', include('main.urls', namespace='main')),
+    path('api/', include('article.api.urls', namespace='api')),
     path('', include('article.urls', namespace='article')),
 ]
 
