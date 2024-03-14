@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from article.models import Article
-from article.models import Author, Category, Tag
+from article.models import Author, Category, Tag, Comment
 
 
 class AuthorSerializer(serializers.ModelSerializer):
@@ -35,3 +35,17 @@ class ArticlePostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Article
         fields = ['author', 'title', 'category', 'image', 'tags']
+
+
+class CommentSerializer(serializers.ModelSerializer):
+    article = ArticleSerializer()
+
+    class Meta:
+        model = Comment
+        fields = ['id', 'article', 'image', 'name', 'email', 'created_date', 'message', 'parent_comment', 'top_level_comment']
+
+
+class CommentPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['article', 'name', 'image', 'email', 'message', 'parent_comment', 'top_level_comment']
